@@ -2,6 +2,7 @@ package ninja.sakib.pultusrxbus.core;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 
@@ -23,13 +24,18 @@ public class PultusRxBus<T> {
         disposableMap = new HashMap<>();
     }
 
-    public void subscribe(Class<?> clazz, String consumerId, Consumer<T> consumer) {
+    public void subscribe(final Class<?> clazz, String consumerId, Consumer<T> consumer) {
         if (disposableMap.containsKey(consumerId)) {
             throwIt("Duplicate consumer id.");
         } else {
             disposableMap.put(consumerId,
                     busSubject
-                            .filter(event -> isClassOf(event, clazz))
+                            .filter(new Predicate<T>() {
+                                @Override
+                                public boolean test(T t) throws Exception {
+                                    return isClassOf(t, clazz);
+                                }
+                            })
                             .subscribe(consumer)
             );
         }
