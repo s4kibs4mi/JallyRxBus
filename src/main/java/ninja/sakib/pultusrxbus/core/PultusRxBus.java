@@ -35,7 +35,7 @@ public class PultusRxBus<T> {
         }
     }
 
-    public boolean isClassOf(T x, Class<?> y) {
+    private boolean isClassOf(T x, Class<?> y) {
         return isEquals(x.getClass().getSimpleName(), y.getSimpleName());
     }
 
