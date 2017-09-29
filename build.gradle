@@ -1,5 +1,5 @@
 group 'ninja.sakib.pultusrxbus'
-version 'beta-0.1'
+version 'beta-0.2'
 
 apply plugin: 'java'
 
