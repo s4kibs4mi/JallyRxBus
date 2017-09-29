@@ -53,7 +53,8 @@ public class SampleEvent {
 ```
 
 Then implement Consumer interface to receive event,
-```
+
+```java
 public class SampleEventReceiver implements Consumer<SampleEvent> {
 
     @Override
@@ -72,12 +73,12 @@ PultusRxBus.getInstance().subscribe(SampleEvent.class, consumerId, new SampleEve
 ```
 
 Finally publish,
-```
+```java
 PultusRxBus.getInstance().publish(new SampleEvent());
 ```
 
 To unsubscribe,
-```
+```java
 PultusRxBus.getInstance().unsubscribe(consumerId);
 ```
 
